@@ -1,4 +1,3 @@
-// main.js
 import ProductData from "./ProductData.mjs";
 import ProductList from "./ProductList.mjs";
 import { qs } from "./utils.mjs";
