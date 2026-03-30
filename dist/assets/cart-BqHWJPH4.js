@@ -1,4 +1,4 @@
-import{a as e,t}from"./utils-CX07fKCp.js";function n(){let e=t(`so-cart`);if(!e||e.length===0){document.querySelector(`.product-list`).innerHTML=`<li>Votre panier est vide</li>`;return}let n=e.map(e=>r(e));document.querySelector(`.product-list`).innerHTML=n.join(``),document.querySelectorAll(`.cart-card__remove`).forEach(e=>{e.addEventListener(`click`,()=>{i(e.getAttribute(`data-id`))})})}function r(e){return`<li class="cart-card divider">
+import{a as e,t}from"./utils-Y0raAJmM.js";function n(){let e=t(`so-cart`);if(!e||e.length===0){document.querySelector(`.product-list`).innerHTML=`<li>Votre panier est vide</li>`;return}let n=e.map(e=>r(e));document.querySelector(`.product-list`).innerHTML=n.join(``),document.querySelectorAll(`.cart-card__remove`).forEach(e=>{e.addEventListener(`click`,()=>{i(e.getAttribute(`data-id`))})})}function r(e){return`<li class="cart-card divider">
   <span class="cart-card__remove" data-id="${e.Id}" title="Supprimer l'article">X</span>
   
   <a href="#" class="cart-card__image">

@@ -6,23 +6,32 @@ const dataSource = new ProductData("tents");
 // 1. On récupère l'ID du produit depuis l'URL (ex: ?product=880RR)
 const productId = getParam("product");
 
-// 2. On crée une fonction pour afficher les détails du produit
 function renderProductDetails(product) {
+  const discount = Math.round(
+    product.SuggestedRetailPrice - product.FinalPrice,
+  );
+
   document.getElementById("productBrandName").innerText = product.Brand.Name;
   document.getElementById("productName").innerText = product.NameWithoutBrand;
   document.getElementById("productImage").src = product.Image;
-  document.getElementById("productImage").alt = product.Name;
-  document.getElementById("productFinalPrice").innerText =
-    `$${product.FinalPrice}`;
+
+  // Affichage du prix avec promo
+  const priceElement = document.getElementById("productFinalPrice");
+  if (discount > 0) {
+    priceElement.innerHTML = `
+      <span class="original-price">$${product.SuggestedRetailPrice}</span> 
+      $${product.FinalPrice} 
+      <span class="discount-amount">(-$${discount})</span>`;
+  } else {
+    priceElement.innerText = `$${product.FinalPrice}`;
+  }
+
   document.getElementById("productColorName").innerText =
     product.Colors.ColorName;
   document.getElementById("productDescriptionHtmlSimple").innerHTML =
     product.DescriptionHtmlSimple;
-
-  // On ajoute l'ID au bouton pour que addToCartHandler sache quoi ajouter
   document.getElementById("addToCart").setAttribute("data-id", product.Id);
 }
-
 // 3. On charge les données du produit et on les affiche
 async function init() {
   if (productId) {
