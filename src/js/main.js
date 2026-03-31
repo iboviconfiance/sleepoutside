@@ -1,6 +1,8 @@
 import ProductData from "./ProductData.mjs";
 import ProductList from "./ProductList.mjs";
 import { qs } from "./utils.mjs";
+import { updateCartCount } from "./utils.mjs";
+updateCartCount(); // Appelé dès que la page s'affiche
 
 // 1. On définit la source de données (tents)
 const dataSource = new ProductData("tents");

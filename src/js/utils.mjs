@@ -36,3 +36,22 @@ export function getParam(param) {
   const urlParams = new URLSearchParams(queryString);
   return urlParams.get(param);
 }
+
+// src/js/utils.mjs
+
+export function updateCartCount() {
+  const cartItems = getLocalStorage("so-cart") || [];
+  const countElement = document.getElementById("cart-count");
+  
+  if (countElement) {
+    const totalItems = cartItems.length;
+    countElement.innerText = totalItems;
+    
+    // Si le panier est vide, on cache la bulle
+    if (totalItems > 0) {
+      countElement.classList.remove("hide");
+    } else {
+      countElement.classList.add("hide");
+    }
+  }
+}

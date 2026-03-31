@@ -1,5 +1,7 @@
 import { setLocalStorage, getLocalStorage, getParam } from "./utils.mjs";
 import ProductData from "./ProductData.mjs";
+import { updateCartCount } from "./utils.mjs";
+updateCartCount(); // Appelé dès que la page s'affiche
 
 const dataSource = new ProductData("tents");
 
@@ -45,13 +47,13 @@ async function init() {
 init();
 
 // --- Le reste de ton code pour le panier (inchangé mais vérifié) ---
-
 function addProductToCart(product) {
   let cartItems = getLocalStorage("so-cart") || [];
-  if (!Array.isArray(cartItems)) cartItems = [];
-
   cartItems.push(product);
   setLocalStorage("so-cart", cartItems);
+
+  // MISE À JOUR ICI
+  updateCartCount();
 }
 
 async function addToCartHandler(e) {
