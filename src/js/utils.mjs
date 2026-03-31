@@ -37,8 +37,6 @@ export function getParam(param) {
   return urlParams.get(param);
 }
 
-// src/js/utils.mjs
-
 export function updateCartCount() {
   const cartItems = getLocalStorage("so-cart") || [];
   const countElement = document.getElementById("cart-count");

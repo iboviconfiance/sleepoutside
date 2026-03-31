@@ -46,7 +46,6 @@ async function init() {
 
 init();
 
-// --- Le reste de ton code pour le panier (inchangé mais vérifié) ---
 function addProductToCart(product) {
   let cartItems = getLocalStorage("so-cart") || [];
   cartItems.push(product);
