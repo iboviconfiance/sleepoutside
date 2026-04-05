@@ -1,9 +1,12 @@
 import { setLocalStorage, getLocalStorage, getParam } from "./utils.mjs";
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 import { updateCartCount } from "./utils.mjs";
 updateCartCount(); // Appelé dès que la page s'affiche
+import { loadHeaderFooter } from "./utils.mjs";
 
-const dataSource = new ProductData("tents");
+loadHeaderFooter();
+
+const dataSource = new ExternalServices("tents");
 
 // 1. On récupère l'ID du produit depuis l'URL (ex: ?product=880RR)
 const productId = getParam("product");
