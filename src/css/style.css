@@ -261,3 +261,15 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+/* Discount Badge Indicator */
+.product-card__discount {
+  display: inline-block;
+  background-color: #d9534f;
+  color: white;
+  font-size: var(--small-font);
+  font-weight: bold;
+  padding: 0.2em 0.5em;
+  border-radius: 4px;
+  margin-left: 0.5em;
+}
