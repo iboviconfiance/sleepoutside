@@ -36,7 +36,13 @@ export default class ProductList {
 
   async init() {
     const list = await this.dataSource.getData();
-    this.renderList(list);
+    const filteredList = this.filterProducts(list);
+    this.renderList(filteredList);
+  }
+
+  filterProducts(list) {
+    const allowedIds = ['880RR', '985RF', '985PR', '344YJ'];
+    return list.filter((product) => allowedIds.includes(product.Id));
   }
 
   renderList(list) {
