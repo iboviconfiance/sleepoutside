@@ -2,6 +2,19 @@ import { getLocalStorage, setLocalStorage } from './utils.mjs';
 import { updateCartCount } from './cartCount.mjs';
 
 function productDetailsTemplate(product) {
+  let discountHTML = '';
+  if (product.FinalPrice < product.SuggestedRetailPrice) {
+    const discountAmount = (
+      product.SuggestedRetailPrice - product.FinalPrice
+    ).toFixed(2);
+    const discountPercent = Math.round(
+      ((product.SuggestedRetailPrice - product.FinalPrice) /
+        product.SuggestedRetailPrice) *
+        100,
+    );
+    discountHTML = `<span class="product-card__discount">${discountPercent}% OFF (Save $${discountAmount})</span>`;
+  }
+
   return `<section class="product-detail">
     <h3>${product.Brand.Name}</h3>
     <h2 class="divider">${product.NameWithoutBrand}</h2>
@@ -10,7 +23,7 @@ function productDetailsTemplate(product) {
       src="${product.Image}"
       alt="${product.NameWithoutBrand}"
     />
-    <p class="product-card__price">$${product.FinalPrice}</p>
+    <p class="product-card__price">$${product.FinalPrice} ${discountHTML}</p>
     <p class="product__color">${product.Colors[0].ColorName}</p>
     <p class="product__description">
       ${product.DescriptionHtmlSimple}
