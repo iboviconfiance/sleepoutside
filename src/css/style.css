@@ -227,8 +227,35 @@ button {
   display: grid;
   grid-template-columns: 25% auto 15%;
   font-size: var(--small-font);
+  position: relative;
   /* max-height: 120px; */
   align-items: center;
+}
+
+.cart-card__remove {
+  align-items: center;
+  background: white;
+  border: 1px solid var(--light-grey);
+  border-radius: 50%;
+  color: var(--dark-grey);
+  display: grid;
+  font-size: 0.75rem;
+  height: 1.75rem;
+  justify-self: end;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  place-items: center;
+  position: absolute;
+  right: 0.25rem;
+  top: 0.25rem;
+  width: 1.75rem;
+  z-index: 1;
+}
+
+.cart-card__remove:hover {
+  background: var(--dark-grey);
+  color: white;
 }
 
 .cart-card__image {
