@@ -1,4 +1,5 @@
 import { getLocalStorage, setLocalStorage } from './utils.mjs';
+import { updateCartCount } from './cartCount.mjs';
 
 function productDetailsTemplate(product) {
   return `<section class="product-detail">
@@ -28,27 +29,44 @@ export default class ProductDetails {
   }
 
   async init() {
-    // use the datasource to get the details for the current product
+    if (!this.productId) {
+      this.renderUnavailable();
+      return;
+    }
+
     this.product = await this.dataSource.findProductById(this.productId);
-    // render the product details HTML
+    if (!this.product) {
+      this.renderUnavailable();
+      return;
+    }
+
     this.renderProductDetails('main');
-    // once the HTML is rendered, add a listener to the Add to Cart button
     document
       .getElementById('addToCart')
-      .addEventListener('click', this.addToCart.bind(this));
+      .addEventListener('click', this.addProductToCart.bind(this));
   }
 
-  addToCart() {
+  addProductToCart() {
     let cartItems = getLocalStorage('so-cart');
     if (!Array.isArray(cartItems)) {
       cartItems = [];
     }
     cartItems.push(this.product);
     setLocalStorage('so-cart', cartItems);
+    updateCartCount();
   }
 
   renderProductDetails(selector) {
     const element = document.querySelector(selector);
-    element.innerHTML = productDetailsTemplate(this.product);
+    if (element) {
+      element.innerHTML = productDetailsTemplate(this.product);
+    }
+  }
+
+  renderUnavailable() {
+    const element = document.querySelector('main');
+    if (element) {
+      element.innerHTML = '<p>Product not found.</p>';
+    }
   }
 }
